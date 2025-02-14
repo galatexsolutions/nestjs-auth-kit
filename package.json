@@ -1,10 +1,10 @@
 {
   "name": "nestjs-auth-kit",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A flexible authentication module for NestJS",
   "main": "index.js",
   "types": "index.d.ts",
-  "repository": "https://github.com/galatex/nestjs-auth-kit",
+  "repository": "https://github.com/galatexsolutions/nestjs-auth-kit",
   "author": "Your Name",
   "license": "MIT",
   "dependencies": {
