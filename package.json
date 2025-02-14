@@ -1,6 +1,6 @@
 {
   "name": "nestjs-auth-kit",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A flexible authentication module for NestJS",
   "main": "index.js",
   "types": "index.d.ts",
