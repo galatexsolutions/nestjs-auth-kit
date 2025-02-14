@@ -9,11 +9,15 @@
     "nestjs",
     "authentication",
     "jwt",
+    "oauth",
     "oauth2",
+    "rbac",
     "otp",
     "password-reset",
     "nestjs-auth",
-    "nestjs-oauth"
+    "nestjs-oauth",
+    "auth",
+    "auth-kit"
   ],
   "author": "GalatexSoftwares",
   "license": "MIT",

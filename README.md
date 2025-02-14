@@ -211,7 +211,7 @@ nestjs-auth-kit/
 ---
 
 ## 📄 License
-MIT License © 2025 [Your Name](https://github.com/yourgithub)
+MIT License © 2025 [Galatex Solutions](https://github.com/galatexsolutions)
 
 ---
 
@@ -227,7 +227,7 @@ MIT License © 2025 [Your Name](https://github.com/yourgithub)
 
 ## 📬 Contact & Support
 
-For issues, questions, or suggestions, feel free to open an issue on [GitHub](https://github.com/yourgithub/nestjs-auth-kit/issues).
+For issues, questions, or suggestions, feel free to open an issue on [GitHub](https://github.com/galatexsolutions/nestjs-auth-kit/issues).
 
 ---
 
