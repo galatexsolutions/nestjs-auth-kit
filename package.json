@@ -2,9 +2,15 @@
   "name": "nestjs-auth-kit",
   "version": "1.0.4",
   "description": "A modular and flexible authentication kit for NestJS with JWT, social login, OTP, and password reset.",
-  "main": "index.js",
-  "types": "index.d.ts",
+  "author": "GalatexSolutions",
+  "license": "MIT",
   "repository": "https://github.com/galatexsolutions/nestjs-auth-kit",
+  "types": "index.d.ts",
+  "type": "module",
+  "main": "index.js",
+  "bin": {
+    "nestjs-auth-kit": "./bin/index.js"
+  },
   "keywords": [
     "nestjs",
     "authentication",
@@ -19,14 +25,16 @@
     "auth",
     "auth-kit"
   ],
-  "author": "GalatexSoftwares",
-  "license": "MIT",
   "dependencies": {
     "@nestjs/common": "^9.0.0",
     "@nestjs/jwt": "^9.0.0",
     "@nestjs/passport": "^9.0.0",
     "nestjs-auth-kit": "^1.0.0",
     "passport": "^0.6.0",
-    "passport-jwt": "^4.0.0"
+    "passport-jwt": "^4.0.0",
+    "inquirer": "^9.2.1"
+  },
+  "engines": {
+    "node": ">=14"
   }
 }

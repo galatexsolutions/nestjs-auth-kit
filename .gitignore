@@ -1,0 +1,11 @@
+# Dependencies
+node_modules
+
+# Build files
+dist
+
+# Editor configurations
+.vscode
+.idea
+
+pnpm-lock.yaml
