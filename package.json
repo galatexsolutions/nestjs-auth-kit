@@ -8,9 +8,6 @@
   "types": "index.d.ts",
   "type": "module",
   "main": "index.js",
-  "bin": {
-    "nestjs-auth-kit": "./bin/index.js"
-  },
   "keywords": [
     "nestjs",
     "authentication",
