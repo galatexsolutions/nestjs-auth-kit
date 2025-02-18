@@ -1,27 +1,57 @@
-import { Controller, Post, Body, UseGuards, Request } from '@nestjs/common';
+import { Controller, Post, Body, Get, Req, UseGuards } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import { LoginDto } from './dto/login.dto';
 import { JwtAuthGuard } from './guards/jwt-auth.guard';
-import {RegisterDto} from "./dto/register.dto";
+import { Roles } from './decorators/roles.decorator';
+import { RolesGuard } from './guards/roles.guard';
 
 @Controller('auth')
 export class AuthController {
     constructor(private readonly authService: AuthService) {}
 
     @Post('login')
-    async login(@Body() loginDto: LoginDto) {
+    async login(@Body() loginDto: any) {
         return this.authService.login(loginDto);
     }
 
-    @Post('register')
-    async register(@Body() registerDto: RegisterDto) {
-        // Handle user registration
-        return { message: 'User registered successfully' };
+    @Get('google')
+    async googleLogin(@Req() req: any) {
+        return this.authService.validateGoogleUser(req.user);
     }
 
+    @Get('facebook')
+    async facebookLogin(@Req() req: any) {
+        return this.authService.validateFacebookUser(req.user);
+    }
+
+    @Post('otp')
+    async sendOtp(@Body('email') email: string) {
+        return this.authService.sendOtp(email);
+    }
+
+    @Post('otp/verify')
+    async verifyOtp(@Body('email') email: string, @Body('otp') otp: string) {
+        return this.authService.verifyOtp(email, otp);
+    }
+
+    @Post('password-reset')
+    async resetPassword(
+        @Body('email') email: string,
+        @Body('otp') otp: string,
+        @Body('newPassword') newPassword: string,
+    ) {
+        return this.authService.resetPassword(email, otp, newPassword);
+    }
+
+    @Get('me')
     @UseGuards(JwtAuthGuard)
-    @Post('protected')
-    getProfile(@Request() req) {
+    async getProfile(@Req() req: any) {
         return req.user;
+    }
+
+    @Get('admin')
+    @UseGuards(JwtAuthGuard, RolesGuard)
+    @Roles('admin')
+    getAdminData() {
+        return { message: 'Admin data' };
     }
 }

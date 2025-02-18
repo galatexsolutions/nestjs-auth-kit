@@ -1,6 +1,14 @@
 export interface AuthOptions {
     jwtSecret: string;
-    enableSocialLogin?: boolean;
-    enableOtp?: boolean;
-    enableRBAC?: boolean;
+    jwtExpiration: string;
+    socialAuth: {
+        google: {
+            clientId: string;
+            clientSecret: string;
+        };
+        facebook: {
+            clientId: string;
+            clientSecret: string;
+        };
+    };
 }
