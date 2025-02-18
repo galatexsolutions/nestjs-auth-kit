@@ -6,6 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="891f4eff-3b7a-4d4a-ac9f-e44ee1779a62" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dto/forgot-password.dto.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dto/forgot-password.dto.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dto/login.dto.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dto/login.dto.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dto/otp.dto.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/dto/otp.dto.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/strategies/facebook.strategy.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/strategies/facebook.strategy.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,7 +83,7 @@
       <workItem from="1739565317829" duration="4082000" />
       <workItem from="1739605673404" duration="729000" />
       <workItem from="1739720743275" duration="29000" />
-      <workItem from="1739907165201" duration="3162000" />
+      <workItem from="1739907165201" duration="4819000" />
     </task>
     <servers />
   </component>
