@@ -3,17 +3,17 @@ import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn } from 'typeor
 @Entity()
 export class Otp {
     @PrimaryGeneratedColumn('uuid')
-    id: string;
+    id?: string;
 
     @Column()
-    email: string;
+    email?: string;
 
     @Column()
-    otp: string;
+    otp?: string;
 
     @Column()
-    expiresAt: Date;
+    expiresAt?: Date;
 
     @CreateDateColumn()
-    createdAt: Date;
+    createdAt?: Date;
 }

@@ -9,6 +9,5 @@ export * from './src/dto/login.dto';
 export * from './src/dto/register.dto';
 export * from './src/dto/forgot-password.dto';
 export * from './src/dto/otp.dto';
-export * from './src/dto/social-login.dto';
 export * from './src/interfaces/auth-options.interface';
 export * from './src/auth.controller';
