@@ -1,7 +1,9 @@
 # 🛡️ NestJS Auth Kit
 
-A modular authentication kit for NestJS providing JWT authentication, OAuth2 social login (Google, Facebook, etc.), OTP verification, and password reset functionality.
-Simplify authentication in your NestJS applications with NestJS Auth Kit. Install the package and start building secure applications today! 🎯
+A modular authentication kit for NestJS providing JWT authentication, OAuth2 social login (Google, Facebook, etc.), OTP verification, and password reset functionality. 
+
+[//]: # (Simplify authentication in your NestJS applications with NestJS Auth Kit. Install the package and start building secure applications today! 🎯)
+
 ---
 
 ## 🚀 Features
