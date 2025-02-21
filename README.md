@@ -26,6 +26,12 @@ A modular authentication kit for NestJS providing JWT authentication, OAuth2 soc
 npm install nestjs-auth-kit
 ```
 
+or with PNPM:
+
+```sh
+pnpm install nestjs-auth-kit
+```
+
 or with Yarn:
 
 ```sh
