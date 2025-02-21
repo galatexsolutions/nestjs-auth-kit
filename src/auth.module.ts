@@ -9,6 +9,9 @@ import { FacebookStrategy } from './strategies/facebook.strategy';
 import { AuthOptions } from './interfaces/auth-options.interface';
 import { OtpService } from './services/otp.service';
 import { ForgotPasswordService } from './services/forgot-password.service';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { OtpEntity } from './entities/otp.entity';
+import { User } from './entities/user.entity';
 
 @Module({})
 export class AuthModule {
@@ -21,6 +24,7 @@ export class AuthModule {
                     secret: options.jwtSecret,
                     signOptions: { expiresIn: options.jwtExpiration },
                 }),
+                TypeOrmModule.forFeature([OtpEntity, User]),
             ],
             providers: [
                 AuthService,

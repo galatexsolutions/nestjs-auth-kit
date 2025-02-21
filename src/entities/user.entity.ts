@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
+import { OtpEntity } from './otp.entity';
 
 @Entity()
 export class User {
@@ -13,4 +14,7 @@ export class User {
 
     @Column('simple-array')
     roles?: string[];
+
+    @OneToMany(() => OtpEntity, (otp) => otp.user)
+    otps?: OtpEntity[];
 }

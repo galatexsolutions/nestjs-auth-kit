@@ -1,19 +1,29 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, ManyToOne } from 'typeorm';
+import { User } from './user.entity';
 
-@Entity()
-export class Otp {
+@Entity('otp')
+export class OtpEntity {
     @PrimaryGeneratedColumn('uuid')
     id?: string;
 
     @Column()
+    otpCode?: string;
+
+    @Column()
     email?: string;
 
-    @Column()
-    otp?: string;
-
-    @Column()
+    @Column({ type: 'timestamp' })
     expiresAt?: Date;
 
+    @Column({ default: false })
+    isVerified?: boolean;
+
+    @ManyToOne(() => User, (user) => user.otps, { onDelete: 'CASCADE' })
+    user?: User;
+  
     @CreateDateColumn()
     createdAt?: Date;
+
+    @UpdateDateColumn()
+    updatedAt?: Date;
 }

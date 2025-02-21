@@ -1,14 +1,14 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Otp } from '../entities/otp.entity';
+import { OtpEntity } from '../entities/otp.entity';
 import * as otplib from 'otplib';
 
 @Injectable()
 export class OtpService {
     constructor(
-        @InjectRepository(Otp)
-        private readonly otpRepository: Repository<Otp>,
+        @InjectRepository(OtpEntity)
+        private readonly otpRepository: Repository<OtpEntity>,
     ) {}
 
     async generateOtp(email: string): Promise<string> {
@@ -21,7 +21,7 @@ export class OtpService {
 
     async verifyOtp(email: string, otp: string): Promise<boolean> {
         const otpRecord = await this.otpRepository.findOne({
-            where: { email, otp },
+            where: { email, otpCode: otp },
             order: { createdAt: 'DESC' },
         });
 
