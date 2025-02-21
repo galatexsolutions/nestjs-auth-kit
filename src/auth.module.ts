@@ -7,6 +7,8 @@ import { JwtStrategy } from './strategies/jwt.strategy';
 import { GoogleStrategy } from './strategies/google.strategy';
 import { FacebookStrategy } from './strategies/facebook.strategy';
 import { AuthOptions } from './interfaces/auth-options.interface';
+import { OtpService } from './services/otp.service';
+import { ForgotPasswordService } from './services/forgot-password.service';
 
 @Module({})
 export class AuthModule {
@@ -22,6 +24,8 @@ export class AuthModule {
             ],
             providers: [
                 AuthService,
+                OtpService,
+                ForgotPasswordService,
                 JwtStrategy,
                 GoogleStrategy,
                 FacebookStrategy,
