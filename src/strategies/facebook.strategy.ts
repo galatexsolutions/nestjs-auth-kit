@@ -1,17 +1,23 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, Inject } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { Strategy } from 'passport-facebook';
 import { AuthService } from '../auth.service';
+import { AuthOptions } from '../interfaces/auth-options.interface';
+import {AUTH_OPTIONS} from "../constants/auth.constants";
 import { VerifyCallback } from 'passport-oauth2'; // Import VerifyCallback from passport-oauth2
+
 
 @Injectable()
 export class FacebookStrategy extends PassportStrategy(Strategy, 'facebook') {
-    constructor(private readonly authService: AuthService) {
+    constructor(
+        private readonly authService: AuthService,
+        @Inject(AUTH_OPTIONS) private readonly authOptions: AuthOptions,
+    ) {
         super({
-            clientID: process.env.FACEBOOK_CLIENT_ID,
-            clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
+            clientID: authOptions.socialAuth?.facebook?.clientId,
+            clientSecret: authOptions.socialAuth?.facebook?.clientSecret,
             callbackURL: 'http://localhost:3000/auth/facebook/callback',
-            profileFields: ['emails', 'name'], // Specify the fields you want to retrieve
+            profileFields: ['emails', 'name'],
         });
     }
 
@@ -19,7 +25,7 @@ export class FacebookStrategy extends PassportStrategy(Strategy, 'facebook') {
         accessToken: string,
         refreshToken: string,
         profile: any,
-        done: VerifyCallback, // Use VerifyCallback here
+        done: VerifyCallback,
     ) {
         const { emails, name } = profile;
         const user = {

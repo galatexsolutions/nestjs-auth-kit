@@ -1,7 +1,9 @@
-import { Injectable } from '@nestjs/common';
+import {Inject, Injectable} from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { OtpService } from './services/otp.service';
 import { ForgotPasswordService } from './services/forgot-password.service';
+import { AUTH_OPTIONS } from "./constants/auth.constants";
+import { AuthOptions } from "./interfaces/auth-options.interface";
 
 @Injectable()
 export class AuthService {
@@ -9,12 +11,16 @@ export class AuthService {
         private readonly jwtService: JwtService,
         private readonly otpService: OtpService,
         private readonly forgotPasswordService: ForgotPasswordService,
+        @Inject(AUTH_OPTIONS) private readonly authOptions: AuthOptions,
     ) {}
 
     async login(user: any) {
         const payload = { email: user.email, sub: user.userId };
         return {
-            access_token: this.jwtService.sign(payload),
+            access_token: this.jwtService.sign(payload, {
+                secret: this.authOptions.jwtSecret,
+                expiresIn: this.authOptions.jwtExpiration,
+            }),
         };
     }
 

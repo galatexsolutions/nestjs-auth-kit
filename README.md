@@ -1,7 +1,7 @@
 # 🛡️ NestJS Auth Kit
 
 A modular authentication kit for NestJS providing JWT authentication, OAuth2 social login (Google, Facebook, etc.), OTP verification, and password reset functionality.
-
+Simplify authentication in your NestJS applications with NestJS Auth Kit. Install the package and start building secure applications today! 🎯
 ---
 
 ## 🚀 Features
@@ -37,11 +37,24 @@ yarn add nestjs-auth-kit
 ### 1️⃣ Import the `AuthModule` in `app.module.ts`
 
 ```ts
-import { Module } from '@nestjs/common';
-import { AuthModule } from 'nestjs-auth-kit';
 
 @Module({
-  imports: [AuthModule.register({})],
+    imports: [
+        AuthModule.register({
+            jwtSecret: process.env.JWT_SECRET,
+            jwtExpiration: process.env.JWT_EXPIRATION || '1h',
+            socialAuth: {
+                google: {
+                    clientId: process.env.GOOGLE_CLIENT_ID,
+                    clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+                },
+                facebook: {
+                    clientId: process.env.FACEBOOK_CLIENT_ID,
+                    clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
+                },
+            },
+        }),
+    ],
 })
 export class AppModule {}
 ```
