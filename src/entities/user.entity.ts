@@ -18,7 +18,7 @@ export class User {
     @Column()
     password?: string;
 
-    @Column('simple-array')
+    @Column('simple-array', { nullable: true })
     roles?: string[];
 
     @OneToMany(() => OtpEntity, (otp) => otp.user)
