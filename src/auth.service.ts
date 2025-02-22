@@ -1,4 +1,4 @@
-import { Inject, Injectable, BadRequestException, InternalServerErrorException } from '@nestjs/common';
+import { Inject, Injectable, BadRequestException, InternalServerErrorException, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { OtpService } from './services/otp.service';
 import { ForgotPasswordService } from './services/forgot-password.service';
@@ -59,18 +59,18 @@ export class AuthService {
         const user = await this.userRepository.findOne({ where: { email } });
 
         if (!user) {
-            throw new Error('Account not found');
+            throw new UnauthorizedException('Account not found');
         }
 
         if (!password) {
-            throw new Error('Password is required');
+            throw new BadRequestException('Password is required');
         }
 
         // Validate the password
         const isPasswordValid = await bcrypt.compare(password, user.password || '');
 
         if (!isPasswordValid) {
-            throw new Error('Invalid credentials');
+            throw new UnauthorizedException('Invalid credentials');
         }
 
         const payload = { email: user.email, sub: user.id };
