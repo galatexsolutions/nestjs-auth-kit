@@ -1,9 +1,9 @@
-import {Inject, Injectable} from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { OtpService } from './services/otp.service';
 import { ForgotPasswordService } from './services/forgot-password.service';
-import { AUTH_OPTIONS } from "./constants/auth.constants";
-import { AuthOptions } from "./interfaces/auth-options.interface";
+import { AUTH_OPTIONS } from './constants/auth.constants';
+import { AuthOptions } from './interfaces/auth-options.interface';
 import { RegisterDto } from './dto/register.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
@@ -23,6 +23,10 @@ export class AuthService {
 
     async register(registerDto: RegisterDto) {
         const { email, password, firstName, lastName } = registerDto;
+
+        if (!password) {
+            throw new Error('Password is required');
+        }
 
         // Encrypt the password
         const hashedPassword = await bcrypt.hash(password, 10);
@@ -46,13 +50,17 @@ export class AuthService {
             throw new Error('Account not found');
         }
 
+        if (!password) {
+            throw new Error('Password is required');
+        }
+
         // Validate the password
         const isPasswordValid = await bcrypt.compare(password, user.password);
         if (!isPasswordValid) {
             throw new Error('Invalid credentials');
         }
 
-        const payload = { email: user.email, sub: user.userId };
+        const payload = { email: user.email, sub: user.id };
         
         return {
             access_token: this.jwtService.sign(payload, {
