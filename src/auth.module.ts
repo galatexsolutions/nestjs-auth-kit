@@ -19,12 +19,12 @@ export class AuthModule {
         return {
             module: AuthModule,
             imports: [
+                TypeOrmModule.forFeature([OtpEntity, User]),
                 PassportModule.register({ defaultStrategy: 'jwt' }),
                 JwtModule.register({
                     secret: options.jwtSecret,
                     signOptions: { expiresIn: options.jwtExpiration },
                 }),
-                TypeOrmModule.forFeature([OtpEntity, User]),
             ],
             providers: [
                 AuthService,

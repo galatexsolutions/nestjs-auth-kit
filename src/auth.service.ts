@@ -4,6 +4,10 @@ import { OtpService } from './services/otp.service';
 import { ForgotPasswordService } from './services/forgot-password.service';
 import { AUTH_OPTIONS } from "./constants/auth.constants";
 import { AuthOptions } from "./interfaces/auth-options.interface";
+import { RegisterDto } from './dto/register.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { User } from './entities/user.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class AuthService {
@@ -12,8 +16,22 @@ export class AuthService {
         private readonly otpService: OtpService,
         private readonly forgotPasswordService: ForgotPasswordService,
         @Inject(AUTH_OPTIONS) private readonly authOptions: AuthOptions,
+        @InjectRepository(User) private readonly userRepository: Repository<User>,
     ) {}
 
+    async register(registerDto: RegisterDto) {
+        const { email, password, firstName, lastName } = registerDto;
+        // Add logic to create a new user
+        const user = this.userRepository.create({
+            email,
+            password,
+            firstName,
+            lastName,
+        });
+
+        return this.userRepository.save(user);
+    }
+    
     async login(user: any) {
         const payload = { email: user.email, sub: user.userId };
         return {

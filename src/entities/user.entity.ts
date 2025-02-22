@@ -7,6 +7,12 @@ export class User {
     id?: string;
 
     @Column()
+    firstName?: string;
+
+    @Column()
+    lastName?: string;
+
+    @Column()
     email?: string;
 
     @Column()
