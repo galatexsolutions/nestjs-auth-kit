@@ -1,6 +1,6 @@
 {
   "name": "nestjs-auth-kit",
-  "version": "1.3.9",
+  "version": "1.4.0",
   "description": "A modular and flexible authentication kit for NestJS with JWT, social login, OTP, and password reset.",
   "author": "GalatexSolutions",
   "license": "MIT",
