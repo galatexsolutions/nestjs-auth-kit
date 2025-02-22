@@ -1,4 +1,4 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Inject, Injectable, BadRequestException, InternalServerErrorException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { OtpService } from './services/otp.service';
 import { ForgotPasswordService } from './services/forgot-password.service';
@@ -25,7 +25,7 @@ export class AuthService {
         const { email, password, firstName, lastName } = registerDto;
 
         if (!password) {
-            throw new Error('Password is required');
+            throw new BadRequestException('Password is required');
         }
 
         // Encrypt the password
@@ -39,7 +39,19 @@ export class AuthService {
             lastName,
         });
 
-        return this.userRepository.save(user);
+        try {
+            const newUser = await this.userRepository.save(user);
+
+            // Destructure the newUser object to exclude the password
+            const { password, ...userWithoutPassword } = newUser;
+
+            return {
+                message: 'User created successfully',
+                user: userWithoutPassword,
+            };
+        } catch (error) {
+            throw new InternalServerErrorException('Failed to create user');
+        }
     }
     
     async login(loginDto: LoginDto) {
