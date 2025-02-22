@@ -8,6 +8,8 @@ import { RegisterDto } from './dto/register.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './entities/user.entity';
 import { Repository } from 'typeorm';
+import * as bcrypt from 'bcrypt';
+import { LoginDto } from './dto/login.dto';
 
 @Injectable()
 export class AuthService {
@@ -21,10 +23,14 @@ export class AuthService {
 
     async register(registerDto: RegisterDto) {
         const { email, password, firstName, lastName } = registerDto;
-        // Add logic to create a new user
+
+        // Encrypt the password
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        // Create a new user
         const user = this.userRepository.create({
             email,
-            password,
+            password: hashedPassword,
             firstName,
             lastName,
         });
@@ -32,8 +38,22 @@ export class AuthService {
         return this.userRepository.save(user);
     }
     
-    async login(user: any) {
+    async login(loginDto: LoginDto) {
+        const { email, password } = loginDto;
+        const user = await this.userRepository.findOne({ where: { email } });
+
+        if (!user) {
+            throw new Error('Account not found');
+        }
+
+        // Validate the password
+        const isPasswordValid = await bcrypt.compare(password, user.password);
+        if (!isPasswordValid) {
+            throw new Error('Invalid credentials');
+        }
+
         const payload = { email: user.email, sub: user.userId };
+        
         return {
             access_token: this.jwtService.sign(payload, {
                 secret: this.authOptions.jwtSecret,

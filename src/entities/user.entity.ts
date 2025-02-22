@@ -3,7 +3,7 @@ import { OtpEntity } from './otp.entity';
 
 @Entity()
 export class User {
-    @PrimaryGeneratedColumn('uuid')
+    @PrimaryGeneratedColumn()
     id?: string;
 
     @Column()
